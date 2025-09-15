@@ -9,3 +9,4 @@ inp2 = input("Voer een getal in: ")
 inp1 = float(inp1)
 inp2 = float(inp2)
 print(gemiddelde(inp1, inp2))
+

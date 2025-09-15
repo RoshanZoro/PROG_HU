@@ -30,16 +30,14 @@ def standaardprijs(afstandKM):
     Returns:
         float: De berekende standaardprijs.
     """
-    prijs = float(0.8)
-    if afstandKM > int(50):
-        prijs = float(15)
-        prijsPerKilometer = float(0.6)
+    if afstandKM > 50:
+        prijsPerKilometer = 0.6
+        prijs = 15 + (afstandKM * prijsPerKilometer)
     else:
-        prijs = float(0.8)
-    if afstandKM < float(0):
-        prijs = float(0)
-    prijs = afstandKM * prijs
-    return
+        prijs = 0.8 * afstandKM
+    if afstandKM < 0:
+        prijs = 0
+    return prijs
 
 
 def ritprijs(leeftijd, weekendrit, afstandKM):
@@ -63,8 +61,25 @@ def ritprijs(leeftijd, weekendrit, afstandKM):
     Returns:
         float: De berekende ritprijs.
     """
-
-    return
+    prijs = standaardprijs(afstandKM)
+    if not weekendrit and leeftijd < 12:
+        prijs = prijs * 0.7
+        return prijs
+    elif weekendrit and leeftijd < 12:
+        prijs = prijs * 0.65
+        return prijs
+    elif not weekendrit and leeftijd >= 65:
+        prijs = prijs * 0.7
+        return prijs
+    elif weekendrit and leeftijd >= 65:
+        prijs = prijs * 0.65
+        return prijs
+    elif not weekendrit and (leeftijd > 12 or leeftijd < 65):
+        return prijs
+    elif weekendrit and (leeftijd > 12 or leeftijd < 65):
+        prijs = prijs * 0.6
+        return prijs
+    return None
 
 
 def development_code():
