@@ -13,8 +13,20 @@
 # Eva Versteeg heeft kaartnummer: 645345
 # Jan de Wilde heeft kaartnummer: 534545
 # Henk de Vrie heeft kaartnummer: 345355
-
+bestand = open("oefening_5_2_kaartnummers.txt")
+lijst = bestand.readlines()
 def prettyPrint():
-    bestand = open("oefening_5_2_kaartnummers.txt")
+    resultaat = ""
+    for pretty in lijst:
+        pretty = pretty.strip()
+        details = pretty.split(",")
+        kaartnummer = details[0]
+        naam = details[1]
+        resultaat += f"{naam} heeft kaartnummer: {kaartnummer}\n"
+    bestand.close()
+    return resultaat
 
-    lijst = bestand.split(",")
+
+print(prettyPrint())
+
+
