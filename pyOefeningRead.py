@@ -1,3 +1,4 @@
+import time
 bestand = open("huisgenoten.txt")
 regels = bestand.readlines()
 leeftijdTotaal = 0
@@ -17,5 +18,13 @@ for huisgenoot in regels:
     print(f"{naam.upper()}: {categorie}")
 bestand.close()
 
+for i in range(1,101):
+    print(f"{i:3} {i:08b} {i:c}")
+
+inp1 = int(input("Geef het eerste getal op: "))
+inp2 = int(input("Geef het tweede getal op: "))
+time.sleep(0.5)
+for i in range(inp1, inp2):
+    print(f"{i:3} {i:08b} {i:c}")
 
 
