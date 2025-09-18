@@ -5,11 +5,22 @@
 # Uitvoer:
 # Deze file telt 6 regels
 # Het grootste kaartnummer is: 645345 en dat staat op regel 4
-data = open("oefening_5_2_kaartnummers.txt")
-nummers = data.readlines()
-lijst = []
-def analyse():
-    for lijn in nummers:
-        lijst.append(int(lijn))
 
-print(lijst)
+def analyse():
+    with open("oefening_5_2_kaartnummers.txt") as bestand:
+        nummers = bestand.readlines()
+    huidigeRegel = 0
+
+    grootsteKaartnummer = 0
+    for lijn in nummers:
+        huidigeRegel += 1
+        lijn = lijn.strip()
+        detail = lijn.split(",")
+        kaartnummer = int(detail[0])
+
+        if kaartnummer > grootsteKaartnummer:
+            grootsteKaartnummer = kaartnummer
+            resultaat = f"Het grootste kaartnummer is: {kaartnummer} en dat staat op regel {huidigeRegel}"
+    return resultaat
+
+print(f"Deze file telt 6 regels.\n{analyse()}")
