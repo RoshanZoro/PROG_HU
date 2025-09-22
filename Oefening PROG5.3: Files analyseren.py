@@ -10,14 +10,12 @@ def analyse():
     with open("oefening_5_2_kaartnummers.txt") as bestand:
         nummers = bestand.readlines()
     huidigeRegel = 0
-
     grootsteKaartnummer = 0
     for lijn in nummers:
         huidigeRegel += 1
         lijn = lijn.strip()
         detail = lijn.split(",")
         kaartnummer = int(detail[0])
-
         if kaartnummer > grootsteKaartnummer:
             grootsteKaartnummer = kaartnummer
             resultaat = f"Het grootste kaartnummer is: {kaartnummer} en dat staat op regel {huidigeRegel}"
