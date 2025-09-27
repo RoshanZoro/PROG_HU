@@ -65,6 +65,7 @@ def nieuwe_kluis():
             row = {nummer: wachtwoord}
             data.append(row)
     bezet = [int(list(d.keys())[0]) for d in data]
+    #https://www.w3schools.com/python/ref_dictionary_keys.asp
     for i in range(1, maxKluizen + 1):
         if i not in bezet:
             kluisnummer = i
@@ -92,7 +93,20 @@ def kluis_openen():
     Returns:
         bool: True als de ingevoerde combinatie correct is, anders False
     """
-    return
+    kluisnummer = int(input("Geef je kluisnummer: "))
+    kluiscode = input("Geef je kluiscode: ")
+    data = []
+    with open("testkluizen.txt", "r") as f:
+        for lijn in f:
+            nummer, wachtwoord = lijn.strip().split(";")
+            row = {nummer: wachtwoord}
+            data.append(row)
+    for d in data:
+        kluisnummerKeys = int(list(d.keys())[0])
+        kluiscodeValues = list(d.values())[0]
+        if kluisnummer == kluisnummerKeys and kluiscode == kluiscodeValues:
+            return True
+    return False
 
 
 def kluis_teruggeven():
