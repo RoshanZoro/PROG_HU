@@ -32,10 +32,14 @@ def aantal_kluizen_vrij():
         int: Het aantal vrije kluizen.
     """
     maxKluizen = 12
+    #max kluizen
     with open('testkluizen.txt' 'r') as bestand:
         regels = [regel for regel in bestand if regel.strip()]
+    #lijst maken met alle regels zonder leegtes
     bezetKluizen = len(regels)
+    #lengte van de lijst
     vrijeKluizen = maxKluizen - bezetKluizen
+    #vrije kluizen berekenen
     bestand.close()
     return vrijeKluizen
 
@@ -65,12 +69,18 @@ def nieuwe_kluis():
             nummer, wachtwoord = lijn.strip().split(";")
             row = {nummer: wachtwoord}
             data.append(row)
+            #kluizen in een dictionary zetten die data heet en de keys is nummer en values is wachtwoord
     bezet = [int(list(d.keys())[0]) for d in data]
+    #lijst maken met alle int keys, de for loop loopt elke dictionary in de lijst
+    #d staat voor dictionary
     #https://www.w3schools.com/python/ref_dictionary_keys.asp
+    #https://sparkbyexamples.com/python/python-get-dictionary-keys-as-a-list/#:~:text=To%20get%20dictionary%20keys%20as%20a%20list%20in%20Python%20use,the%20form%20of%20a%20list.
     for i in range(1, maxKluizen + 1):
         if i not in bezet:
             kluisnummer = i
             break
+            #i = index, als index niet in bezet is, dus niet in de lijst
+            #dan is kluisnummer de index (max 12)
     if aantal_kluizen_vrij() > 0:
         kluiscode = input("Voer een kluiscode in: [0000] ")
         if len(kluiscode) < 4:
