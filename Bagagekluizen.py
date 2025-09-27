@@ -192,11 +192,20 @@ def development_code():
         if keuze == "1":
             print(f"Er zijn {aantal_kluizen_vrij()} kluizen vrij.")
         elif keuze == "2":
-            nieuwe_kluis()
+            if nieuwe_kluis():
+                print("Nieuwe kluis succesvol toegewezen!")
+            else:
+                print("Er zijn geen vrije kluizen meer.")
         elif keuze == "3":
-            kluis_openen()
+            if kluis_openen():
+                print("Je kluis is geopend!")
+            else:
+                print("Fout: kluisnummer of code klopt niet.")
         elif keuze == "4":
-            kluis_teruggeven()
+            if kluis_teruggeven():
+                print("Je kluis is succesvol teruggegeven!")
+            else:
+                print("Fout: kluisnummer of code klopt niet.")
         elif keuze == "5":
             print("Programma wordt afgesloten.")
             break
