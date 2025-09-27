@@ -31,10 +31,11 @@ def aantal_kluizen_vrij():
     Returns:
         int: Het aantal vrije kluizen.
     """
-    bestand = open('testkluizen.txt')
-    regels = bestand.readlines()
+    maxKluizen = 12
+    with open('testkluizen.txt' 'r') as bestand:
+        regels = [regel for regel in bestand if regel.strip()]
     bezetKluizen = len(regels)
-    vrijeKluizen = 12 - bezetKluizen
+    vrijeKluizen = maxKluizen - bezetKluizen
     bestand.close()
     return vrijeKluizen
 
@@ -123,12 +124,36 @@ def kluis_teruggeven():
     Returns:
         bool: True als er een kluiscombinatie verwijderd werd, anders False
     """
-    return
+    kluisnummer = int(input("Geef je kluisnummer: "))
+    kluiscode = input("Geef je kluiscode: ")
+    data = []
+    with open("testkluizen.txt", "r") as f:
+        for lijn in f:
+            nummer, wachtwoord = lijn.strip().split(";")
+            row = {nummer: wachtwoord}
+            data.append(row)
+    for d in data:
+        kluisnummerKeys = int(list(d.keys())[0])
+        kluiscodeValues = list(d.values())[0]
+        #https://www.w3schools.com/python/ref_dictionary_values.asp
+        if kluisnummer == kluisnummerKeys and kluiscode == kluiscodeValues:
+            with open("testkluizen.txt", "r") as kluisfile:
+                regels = kluisfile.readlines()
+                verwijder = f"{kluisnummer};{kluiscode}"
+                regels = [regel.strip() for regel in regels if regel.strip() != verwijder]
+                with open(f"testkluizen.txt", "w") as kluisfile:
+                    for regel in regels:
+                        kluisfile.writelines(regel.strip() + "\n")
+            return True
+    return False
 
 
 def development_code():
     # Breid deze code uit om het keuzemenu te realiseren:
     print("1: Ik wil weten hoeveel kluizen nog vrij zijn")
+    print("2: Ik wil een nieuwe kluis ")
+    print("3: Ik wil even iets uit mijn kluis halen ")
+    print("4: Ik geef mijn kluis terug")
 
 
 def module_runner():
@@ -376,7 +401,7 @@ def __run_tests():
                       test_nieuwe_kluis,
                       test_kluis_openen,
                       # Uncomment de regel hieronder om ook de optionele functie kluis_teruggeven te testen:
-                      #test_kluis_teruggeven
+                      test_kluis_teruggeven
                      ]
 
     try:
