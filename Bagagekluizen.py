@@ -33,7 +33,7 @@ def aantal_kluizen_vrij():
     """
     maxKluizen = 12
     #max kluizen
-    with open('testkluizen.txt' 'r') as bestand:
+    with open('testkluizen.txt', 'r') as bestand:
         regels = [regel for regel in bestand if regel.strip()]
     #lijst maken met alle regels zonder leegtes
     bezetKluizen = len(regels)
@@ -179,11 +179,29 @@ def kluis_teruggeven():
 
 
 def development_code():
-    # Breid deze code uit om het keuzemenu te realiseren:
-    print("1: Ik wil weten hoeveel kluizen nog vrij zijn")
-    print("2: Ik wil een nieuwe kluis ")
-    print("3: Ik wil even iets uit mijn kluis halen ")
-    print("4: Ik geef mijn kluis terug")
+    while True:
+        print("\n--- Keuzemenu ---")
+        print("1: Ik wil weten hoeveel kluizen nog vrij zijn")
+        print("2: Ik wil een nieuwe kluis")
+        print("3: Ik wil even iets uit mijn kluis halen")
+        print("4: Ik geef mijn kluis terug")
+        print("5: Stoppen")
+
+        keuze = input("Maak een keuze (1-5): ")
+
+        if keuze == "1":
+            print(f"Er zijn {aantal_kluizen_vrij()} kluizen vrij.")
+        elif keuze == "2":
+            nieuwe_kluis()
+        elif keuze == "3":
+            kluis_openen()
+        elif keuze == "4":
+            kluis_teruggeven()
+        elif keuze == "5":
+            print("Programma wordt afgesloten.")
+            break
+        else:
+            print("Ongeldige keuze, probeer opnieuw.")
 
 
 def module_runner():
