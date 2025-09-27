@@ -104,6 +104,7 @@ def kluis_openen():
     for d in data:
         kluisnummerKeys = int(list(d.keys())[0])
         kluiscodeValues = list(d.values())[0]
+        #https://www.w3schools.com/python/ref_dictionary_values.asp
         if kluisnummer == kluisnummerKeys and kluiscode == kluiscodeValues:
             return True
     return False
