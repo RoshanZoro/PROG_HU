@@ -80,7 +80,8 @@ def nieuwe_kluis():
             kluisnummer = i
             break
             #i = index, als index niet in bezet is, dus niet in de lijst
-            #dan is kluisnummer de index (max 12)
+            #dan is kluisnummer de index (max 12), index is nummer of positie van een item in een lijst
+            #(bezet lijst)
     if aantal_kluizen_vrij() > 0:
         kluiscode = input("Voer een kluiscode in: [0000] ")
         if len(kluiscode) < 4:
@@ -90,7 +91,9 @@ def nieuwe_kluis():
         else:
             with open("testkluizen.txt", "a") as kluisfile:
                 kluisfile.write(f"{kluisnummer};{kluiscode}\n")
+                #kluisnummer en code correct toevoegen
             return kluisnummer
+        #kluisnummer van de vorige for loop terug geven
     else:
         return -2
 
@@ -112,9 +115,13 @@ def kluis_openen():
             nummer, wachtwoord = lijn.strip().split(";")
             row = {nummer: wachtwoord}
             data.append(row)
+            #copy paste van vorige functie, weer dictionary maken
     for d in data:
         kluisnummerKeys = int(list(d.keys())[0])
         kluiscodeValues = list(d.values())[0]
+        #key en values in variable zetten en daarna kijken of de input overeen komt met
+        #de dictionary en dat doet hij voor elke key en value omdat het een for loop is
+
         #https://www.w3schools.com/python/ref_dictionary_values.asp
         if kluisnummer == kluisnummerKeys and kluiscode == kluiscodeValues:
             return True
@@ -147,13 +154,26 @@ def kluis_teruggeven():
         kluiscodeValues = list(d.values())[0]
         #https://www.w3schools.com/python/ref_dictionary_values.asp
         if kluisnummer == kluisnummerKeys and kluiscode == kluiscodeValues:
+            #bijna het zelfde als de vorige functie
             with open("testkluizen.txt", "r") as kluisfile:
                 regels = kluisfile.readlines()
                 verwijder = f"{kluisnummer};{kluiscode}"
+                #als de ingevulde nummer en code overeen komt met de keys en values dan
+                #alle regels zonder (!=) de input schrijven
+                #dus hij neemt alle regels mee die niet gelijk zijn aan verwijder en die zetten we in een lijst
+                #ook alle spaties en enters weghalen
+                #https://www.w3schools.com/python/python_operators.asp
                 regels = [regel.strip() for regel in regels if regel.strip() != verwijder]
+                #https://www.w3schools.com/python/python_lists_comprehension.asp
+                # nieuweRegels = []
+                # for regel in regels:
+                #   if regel.strip() != verwijder:
+                #     nieuweRegels.append(regel.strip())
                 with open(f"testkluizen.txt", "w") as kluisfile:
                     for regel in regels:
-                        kluisfile.writelines(regel.strip() + "\n")
+                        #verander naar de lijst nieuweRegels als je geen comprehension gebruikt
+                        kluisfile.write(regel.strip() + "\n")
+                        #alle regels schrijven van de lijst regels
             return True
     return False
 
